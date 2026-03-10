@@ -115,4 +115,161 @@ body.dark-mode #searchInput {
 }
 
 .style-discovery {
-    display:
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 10px;
+}
+
+.chip {
+    border: 1px solid #ddd;
+    background: var(--white);
+    padding: 8px 20px;
+    border-radius: 20px;
+    white-space: nowrap;
+    cursor: pointer;
+    color: var(--text-main);
+    transition: var(--transition);
+}
+
+.chip.active {
+    background: var(--zuhal-orange);
+    color: white;
+    border: none;
+}
+
+/* --- 6. PRODUCT GRID & CARDS --- */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 20px 40px;
+}
+
+.product-card {
+    background: var(--bg-card);
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 15px;
+    transition: transform var(--transition);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.product-card:hover { transform: translateY(-5px); }
+
+.premium-tag {
+    background: var(--zuhal-orange);
+    color: white;
+    padding: 4px 12px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border-radius: 4px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+}
+
+.delete-btn {
+    background: #ffeded;
+    color: #cc0000;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.delete-btn:hover { background: #cc0000; color: white; }
+
+/* --- 7. DETAILS PAGE --- */
+.details-container {
+    max-width: 1100px;
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 50px;
+    padding: 30px;
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+}
+
+.details-image img {
+    width: 100%;
+    height: 500px;
+    border-radius: 18px;
+    object-fit: cover;
+}
+
+.details-info .price-tag {
+    font-size: 2rem;
+    color: var(--zuhal-orange);
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.contact-box {
+    margin-top: 40px;
+    padding: 25px;
+    background: var(--zuhal-cream);
+    border: 1px solid rgba(0,0,0,0.05);
+    border-radius: 16px;
+    text-align: center;
+}
+
+.whatsapp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #25D366;
+    color: white !important;
+    padding: 18px;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+/* --- 8. SELLER TOOLS & INPUTS --- */
+.file-input {
+    padding: 15px;
+    background: var(--zuhal-cream);
+    border: 2px dashed var(--zuhal-green);
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input, textarea, select {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.related-section {
+    max-width: 1100px;
+    margin: 40px auto 80px;
+    padding: 0 20px;
+}
+
+/* --- 9. RESPONSIVENESS --- */
+@media (max-width: 768px) {
+    .details-container {
+        grid-template-columns: 1fr;
+        margin: 10px;
+        padding: 20px;
+    }
+    
+    .details-image img { height: 350px; }
+    
+    .search-container { width: 95%; }
+}
