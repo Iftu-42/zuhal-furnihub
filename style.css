@@ -174,3 +174,43 @@
     border-top: 1px solid #eee;
     margin-bottom: 20px;
 }
+/* --- Dark Mode Colors --- */
+body.dark-mode {
+    --zuhal-cream: #121212; /* Dark Background */
+    --bg-card: #1e1e1e;    /* Darker Grey Cards */
+    color: #e0e0e0;        /* Light Text */
+}
+
+body.dark-mode .navbar {
+    background: #0a0a0a;
+}
+
+body.dark-mode .product-card, 
+body.dark-mode .details-container,
+body.dark-mode .sell-card {
+    background: #1e1e1e;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+body.dark-mode input, 
+body.dark-mode textarea, 
+body.dark-mode select {
+    background: #2a2a2a;
+    color: white;
+    border: 1px solid #444;
+}
+
+/* Toggle Button Style */
+.mode-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.3s ease;
+}
+
+.mode-btn:hover {
+    transform: rotate(20deg);
+}
