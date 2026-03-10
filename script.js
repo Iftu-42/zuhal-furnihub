@@ -89,3 +89,26 @@ function renderRelated(items) {
         relatedGrid.innerHTML += card;
     });
 }
+// --- DARK MODE LOGIC ---
+const toggleBtn = document.getElementById('dark-mode-toggle');
+const body = document.body;
+
+// Check if user previously liked Dark Mode
+if (localStorage.getItem('dark-mode') === 'enabled') {
+    body.classList.add('dark-mode');
+    if(toggleBtn) toggleBtn.innerText = '☀️';
+}
+
+if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('dark-mode', 'enabled');
+            toggleBtn.innerText = '☀️';
+        } else {
+            localStorage.setItem('dark-mode', 'disabled');
+            toggleBtn.innerText = '🌙';
+        }
+    });
+}
