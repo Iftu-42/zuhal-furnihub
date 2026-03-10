@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Item Details | Zuhal FurniHub</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="index.html" style="color:white; text-decoration:none;">Zuhal FurniHub</a></div>
+        <a href="index.html" style="color:white; text-decoration:none;">← Back to Shop</a>
+    </nav>
+
+    <main class="details-container" id="detailsView">
+        </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Specific logic for this page
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const itemId = urlParams.get('id');
+            showItemDetails(itemId);
+        }
+    </script>
+</body>
+</html>
