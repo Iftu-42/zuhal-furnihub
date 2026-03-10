@@ -44,6 +44,28 @@
     </section>
 
     <main class="product-grid" id="productGrid">
+        <section class="delivery-calc">
+    <h3>🚚 Estimate Delivery Cost</h3>
+    <div class="calc-box">
+        <label>Pickup Area:</label>
+        <select id="pickup">
+            <option value="0">Addis Ketema (Merkato)</option>
+            <option value="150">Bole</option>
+            <option value="200">CMC / Ayat</option>
+            <option value="100">Piassa</option>
+        </select>
+
+        <label>Item Size:</label>
+        <select id="itemSize">
+            <option value="1">Small (Chair/Lamp)</option>
+            <option value="2.5">Medium (Dining Table)</option>
+            <option value="5">Large (3-Seater Sofa / Bed)</option>
+        </select>
+        
+        <button onclick="calculateDelivery()">Check Price</button>
+        <p id="deliveryResult"></p>
+    </div>
+</section>
         </main>
     <section class="custom-request">
     <h2>Can't find what you need?</h2>
