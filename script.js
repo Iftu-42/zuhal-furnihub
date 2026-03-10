@@ -52,3 +52,13 @@ function submitRequest() {
     document.getElementById('customItemName').value = "";
     document.getElementById('customDescription').value = "";
 }
+function calculateDelivery() {
+    const baseRate = 500; // Base start price in ETB
+    const areaBonus = parseInt(document.getElementById('pickup').value);
+    const sizeMultiplier = parseFloat(document.getElementById('itemSize').value);
+    
+    const total = (baseRate + areaBonus) * sizeMultiplier;
+    
+    document.getElementById('deliveryResult').innerText = 
+        `Estimated Delivery: ${total.toLocaleString()} ETB (Includes loading/unloading)`;
+}
