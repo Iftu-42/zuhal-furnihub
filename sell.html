@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sell on Zuhal FurniHub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="index.html" style="color:white; text-decoration:none;">Zuhal FurniHub</a></div>
+        <a href="index.html" style="color:white;">Back to Shop</a>
+    </nav>
+
+    <section class="form-container">
+        <h2>List Your Furniture</h2>
+        <div class="sell-card">
+            <label>Item Name</label>
+            <input type="text" id="itemName" placeholder="e.g. Vintage Leather Armchair">
+
+            <label>Price (ETB)</label>
+            <input type="number" id="itemPrice" oninput="updateEarnings()" placeholder="0.00">
+            
+            <div class="earnings-breakdown">
+                <p>Zuhal Fee (10%): <span id="feeAmount">0</span> ETB</p>
+                <p><strong>You will receive: <span id="finalEarning">0</span> ETB</strong></p>
+            </div>
+
+            <label>Furniture Style</label>
+            <select id="itemStyle">
+                <option value="Modern">Modern</option>
+                <option value="Scandinavian">Scandinavian</option>
+                <option value="Ethiopian Traditional">Ethiopian Traditional</option>
+                <option value="Minimalist">Minimalist</option>
+            </select>
+
+            <label class="premium-option">
+                <input type="checkbox" id="isPremium"> 
+                ✨ Make this a Premium Listing (Front Page)
+            </label>
+
+            <button class="request-btn" onclick="postAd()">Post My Ad</button>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
