@@ -38,3 +38,17 @@ function filterByStyle(style) {
 
 // Initial display
 displayProducts(furniture);
+function submitRequest() {
+    const itemName = document.getElementById('customItemName').value;
+    if(itemName === "") {
+        alert("Please enter what you are looking for!");
+        return;
+    }
+    
+    // For now, we simulate a success message
+    alert(`Success! Your request for a "${itemName}" has been sent to 15 nearby carpenters. You will receive bids shortly.`);
+    
+    // Clear the form
+    document.getElementById('customItemName').value = "";
+    document.getElementById('customDescription').value = "";
+}
