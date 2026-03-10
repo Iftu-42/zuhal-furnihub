@@ -5,95 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zuhal FurniHub | Premium Marketplace</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
-<body>
+<body onload="initApp()">
 
     <nav class="navbar">
-        <div class="logo">Zuhal FurniHub</div>
-        
+        <div class="logo">ZUHAL</div>
         <div class="nav-links">
-            <a href="sell.html" class="sell-btn-nav">+ Sell Furniture</a>
+            <span onclick="navigateTo('view-marketplace')" class="tab-link active" id="tab-marketplace">Marketplace</span>
+            <span onclick="navigateTo('view-seller')" class="tab-link" id="tab-seller">Seller Studio</span>
+            <span onclick="navigateTo('view-cart')" class="tab-link" id="tab-cart">Cart</span>
+            <span onclick="navigateTo('view-chat')" class="tab-link" id="tab-chat">Messages</span>
         </div>
-
         <div class="nav-icons">
-            <button id="dark-mode-toggle" class="mode-btn">🌙</button>
-            <span class="icon-spacing">🛒</span>
-            <span class="icon-spacing">🔔</span>
+            <button onclick="toggleDarkMode()" class="mode-btn" id="themeIcon">🌙</button>
             <div class="profile-circle"></div>
         </div>
     </nav>
 
-    <header class="hero">
-        <h1>Find your next <span class="highlight">comfort.</span></h1>
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search sofas, tables, decor..." onkeyup="searchFurniture()">
-            <button class="search-btn">🔍</button>
-        </div>
-    </header>
-
-    <section class="filter-section">
-        <div class="style-discovery">
-            <button class="chip active" onclick="filterByStyle('All')">All</button>
-            <button class="chip" onclick="filterByStyle('Modern')">Modern</button>
-            <button class="chip" onclick="filterByStyle('Ethiopian Traditional')">Ethiopian Traditional</button>
-            <button class="chip" onclick="filterByStyle('Scandinavian')">Scandinavian</button>
-        </div>
-        
-        <div class="secondary-filters">
-            <select id="roomSize" onchange="filterBySize()">
-                <option value="all">Any Room Size</option>
-                <option value="small">Small (Studio/Apartment)</option>
-                <option value="large">Large (Villa)</option>
-            </select>
-        </div>
-    </section>
-
-    <main class="product-grid" id="productGrid">
-        </main>
-
-    <section class="tools-container">
-        <div class="delivery-calc">
-            <h3>🚚 Estimate Delivery Cost</h3>
-            <div class="calc-box">
-                <label>Pickup Area:</label>
-                <select id="pickup">
-                    <option value="0">Addis Ketema (Merkato)</option>
-                    <option value="150">Bole</option>
-                    <option value="200">CMC / Ayat</option>
-                    <option value="100">Piassa</option>
-                </select>
-
-                <label>Item Size:</label>
-                <select id="itemSize">
-                    <option value="1">Small (Chair/Lamp)</option>
-                    <option value="2.5">Medium (Dining Table)</option>
-                    <option value="5">Large (3-Seater Sofa / Bed)</option>
-                </select>
-                
-                <button class="request-btn" onclick="calculateDelivery()">Check Price</button>
-                <p id="deliveryResult"></p>
-            </div>
-        </div>
-
-        <div class="custom-request">
-            <h2>Can't find what you need?</h2>
-            <p>Request a custom piece from local Addis carpenters.</p>
-            <div class="request-form">
-                <input type="text" id="customItemName" placeholder="e.g., Rosewood Office Desk">
-                <textarea id="customDescription" placeholder="Describe the dimensions and style..."></textarea>
-                <div class="upload-box">
-                    <label for="file-upload">📸 Upload Reference Image</label>
-                    <input id="file-upload" type="file" />
+    <main class="main-content">
+        <section id="view-marketplace" class="view-section" style="display:block;">
+            <header class="hero">
+                <h1>Find your next <span class="highlight">comfort.</span></h1>
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search sofas, tables, decor..." onkeyup="searchFurniture()">
+                    <button class="search-btn">🔍</button>
                 </div>
-                <button class="request-btn" onclick="submitRequest()">Send to Local Carpenters</button>
-            </div>
-        </div>
-    </section>
+            </header>
 
-    <footer style="text-align: center; padding: 40px; opacity: 0.6; font-size: 0.8rem;">
-        &copy; 2026 Zuhal FurniHub | Addis Ababa, Ethiopia
-    </footer>
+            <div class="filter-section">
+                <div class="style-discovery">
+                    <button class="chip active" onclick="filterByStyle('All')">All</button>
+                    <button class="chip" onclick="filterByStyle('Modern')">Modern</button>
+                    <button class="chip" onclick="filterByStyle('Ethiopian Traditional')">Traditional</button>
+                    <button class="chip" onclick="filterByStyle('Scandinavian')">Scandinavian</button>
+                </div>
+                <select id="roomSize" onchange="filterBySize()" class="glass-select">
+                    <option value="all">Any Room Size</option>
+                    <option value="small">Small (Studio)</option>
+                    <option value="large">Large (Villa)</option>
+                </select>
+            </div>
+
+            <div class="product-grid" id="productGrid"></div>
+
+            <div class="tools-grid">
+                <div class="dashboard-card">
+                    <h3>🚚 Delivery Estimator</h3>
+                    <div class="calc-box">
+                        <select id="pickup" class="glass-select">
+                            <option value="0">Merkato</option>
+                            <option value="150">Bole</option>
+                            <option value="200">CMC/Ayat</option>
+                        </select>
+                        <select id="itemSize" class="glass-select">
+                            <option value="1">Small (Chair)</option>
+                            <option value="5">Large (Sofa)</option>
+                        </select>
+                        <button class="action-btn" onclick="calculateDelivery()">Calculate</button>
+                        <p id="deliveryResult"></p>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <h3>🛠️ Carpenter Request</h3>
+                    <div class="calc-box">
+                        <input type="text" id="customItem" placeholder="What do you need?" class="glass-input">
+                        <button class="action-btn" onclick="submitRequest()">Send Request</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-seller" class="view-section">
+            <div class="hero">
+                <h1>Seller <span class="highlight">Studio</span></h1>
+                <p>Manage your listings and track your 10% commission.</p>
+                <a href="sell.html" class="action-btn" style="text-decoration:none; display:inline-block; margin-top:20px;">+ Post New Ad</a>
+            </div>
+            <div class="dashboard-card" style="margin-top:40px;">
+                <h3>Your Insights</h3>
+                <div class="stats-row">
+                    <div class="stat"><h4>Active Ads</h4><p>3</p></div>
+                    <div class="stat"><h4>Pending ETB</h4><p>1,200</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-cart" class="view-section">
+            <div class="hero"><h1>Your Cart</h1><p>No items added yet.</p></div>
+        </section>
+        <section id="view-chat" class="view-section">
+            <div class="hero"><h1>Messages</h1><p>No active conversations.</p></div>
+        </section>
+    </main>
 
     <script src="script.js"></script>
 </body>
