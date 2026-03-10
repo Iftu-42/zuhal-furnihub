@@ -71,3 +71,32 @@ function filterBySize() {
         
     displayProducts(filtered);
 }
+function updateEarnings() {
+    const price = document.getElementById('itemPrice').value;
+    const fee = price * 0.10;
+    const earning = price - fee;
+
+    document.getElementById('feeAmount').innerText = fee.toLocaleString();
+    document.getElementById('finalEarning').innerText = earning.toLocaleString();
+}
+
+function postAd() {
+    const name = document.getElementById('itemName').value;
+    const price = document.getElementById('itemPrice').value;
+    const isPremium = document.getElementById('isPremium').checked;
+
+    if (!name || !price) {
+        alert("Please fill in the name and price!");
+        return;
+    }
+
+    // Logic for Premium Fee
+    if (isPremium) {
+        alert(`Great choice! Your "${name}" will be featured on the first page once the premium fee is confirmed.`);
+    } else {
+        alert(`Your ad for "${name}" has been listed!`);
+    }
+    
+    // Redirect back to home
+    window.location.href = "index.html";
+}
