@@ -39,3 +39,37 @@ function displayProducts(items = furniture) {
 // 3. Item Details Function (details.html)
 function showItemDetails(id) {
     const container = document.getElementById
+function showRelatedProducts(currentCategory, currentId) {
+    const relatedGrid = document.getElementById('relatedGrid');
+    if (!relatedGrid) return;
+
+    // Filter items: must be same style BUT not the item we are currently looking at
+    const related = furniture.filter(f => f.style === currentCategory && f.id != currentId);
+
+    if (related.length === 0) {
+        // If no same style, just show the most recent 3 items
+        const recent = furniture.filter(f => f.id != currentId).slice(0, 3);
+        renderRelated(recent);
+    } else {
+        renderRelated(related.slice(0, 3)); // Show top 3 matches
+    }
+}
+
+function renderRelated(items) {
+    const relatedGrid = document.getElementById('relatedGrid');
+    relatedGrid.innerHTML = "";
+
+    items.forEach(item => {
+        const card = `
+            <div class="product-card">
+                <img src="${item.img || 'https://via.placeholder.com/400x250'}" style="width:100%; height:180px; object-fit:cover;">
+                <div style="padding:15px;">
+                    <h3>${item.name}</h3>
+                    <p><strong>${item.price.toLocaleString()} ETB</strong></p>
+                    <button class="buy-btn" onclick="window.location.href='details.html?id=${item.id}'" style="width:100%; background:var(--zuhal-green); color:white; border:none; padding:8px; border-radius:4px; cursor:pointer;">View</button>
+                </div>
+            </div>
+        `;
+        relatedGrid.innerHTML += card;
+    });
+}
