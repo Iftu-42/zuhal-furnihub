@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zuhal FurniHub | Premium Marketplace</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Zuhal FurniHub</div>
+        <div class="nav-icons">
+            <span>🛒</span>
+            <span>🔔</span>
+            <div class="profile-circle"></div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Find your next <span class="highlight">comfort.</span></h1>
+        <div class="search-container">
+            <input type="text" placeholder="Search sofas, tables, decor...">
+            <button class="search-btn">🔍</button>
+        </div>
+    </header>
+
+    <section class="filter-section">
+        <div class="style-discovery">
+            <button class="chip active" onclick="filterByStyle('All')">All</button>
+            <button class="chip" onclick="filterByStyle('Modern')">Modern</button>
+            <button class="chip" onclick="filterByStyle('Ethiopian Traditional')">Ethiopian Traditional</button>
+            <button class="chip" onclick="filterByStyle('Scandinavian')">Scandinavian</button>
+        </div>
+        
+        <div class="secondary-filters">
+            <select id="roomSize" onchange="filterBySize()">
+                <option value="all">Any Room Size</option>
+                <option value="small">Small (Studio/Apartment)</option>
+                <option value="large">Large (Villa)</option>
+            </select>
+        </div>
+    </section>
+
+    <main class="product-grid" id="productGrid">
+        </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
