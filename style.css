@@ -85,3 +85,81 @@
     font-weight: bold;
     margin-top: 10px;
 }
+/* --- Details Page Layout --- */
+.details-container {
+    max-width: 1100px;
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr; /* Image is slightly larger than info box */
+    gap: 50px;
+    padding: 30px;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+}
+
+.details-image img {
+    width: 100%;
+    height: 500px;
+    border-radius: 18px;
+    object-fit: cover;
+}
+
+/* --- Typography & Info --- */
+.details-info h1 {
+    color: var(--zuhal-green);
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.details-info .price-tag {
+    font-size: 2rem;
+    color: var(--zuhal-orange);
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+/* --- The WhatsApp Contact Box --- */
+.contact-box {
+    margin-top: 40px;
+    padding: 25px;
+    background: #f9fcf8; /* Very light green tint */
+    border: 1px solid #e1eedd;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.whatsapp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #25D366; /* Official WhatsApp Green */
+    color: white;
+    padding: 18px;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: transform 0.3s ease, background 0.3s ease;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-btn:hover {
+    background: #1eb954;
+    transform: translateY(-3px);
+}
+
+/* Mobile Responsiveness: Stack columns on small screens */
+@media (max-width: 768px) {
+    .details-container {
+        grid-template-columns: 1fr;
+        margin: 10px;
+        padding: 15px;
+    }
+    
+    .details-image img {
+        height: 300px;
+    }
+}
