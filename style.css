@@ -72,3 +72,41 @@ body {
     font-size: 10px;
     font-weight: bold;
 }
+.custom-request {
+    background: var(--zuhal-green);
+    color: white;
+    padding: 40px 20px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.request-form {
+    max-width: 500px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.request-form input, .request-form textarea {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+}
+
+.upload-box {
+    border: 2px dashed rgba(255,255,255,0.5);
+    padding: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.request-btn {
+    background: var(--zuhal-orange);
+    color: white;
+    border: none;
+    padding: 15px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+}
