@@ -1,4 +1,4 @@
-// 1. DATA MANAGEMENT: Load from LocalStorage or use Defaults
+// 1. Initial Data & LocalStorage Setup
 const defaultFurniture = [
     { id: 1, name: "Zuhal Velvet Sofa", price: 75000, style: "Modern", size: "large", premium: true, img: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=400" },
     { id: 2, name: "Traditional Coffee Table", price: 12000, style: "Ethiopian Traditional", size: "small", premium: false, img: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=400" },
@@ -7,10 +7,10 @@ const defaultFurniture = [
 
 let furniture = JSON.parse(localStorage.getItem('zuhal_products')) || defaultFurniture;
 
-// 2. DISPLAY LOGIC: Renders cards to the grid
+// 2. Display Products (Updated with Remove Button)
 function displayProducts(items = furniture) {
     const grid = document.getElementById('productGrid');
-    if (!grid) return; // Exit if on the 'Sell' page
+    if (!grid) return; 
     
     grid.innerHTML = "";
 
@@ -24,7 +24,12 @@ function displayProducts(items = furniture) {
                     <h3>${item.name}</h3>
                     <p><strong>${Number(item.price).toLocaleString()} ETB</strong></p>
                     <small>Zuhal Fee (10%): ${commission.toLocaleString()} ETB</small>
-                    <button class="buy-btn" style="width:100%; margin-top:10px; background: #3D5A37; color:white; border:none; padding:8px; border-radius:5px; cursor:pointer;">View Details</button>
+                    
+                    <div style="display:flex; justify-content: space-between; margin-top:10px;">
+                        <button class="buy-btn" style="background:var(--zuhal-green); color:white; border:none; padding:5px 10px; border-radius:4px; cursor:pointer;">View</button>
+                        
+                        <button class="delete-btn" onclick="deleteItem(${item.id})" style="background:#ffeded; color:#cc0000; border:none; padding:5px 10px; border-radius:4px; cursor:pointer; font-size:12px;">Remove</button>
+                    </div>
                 </div>
             </div>
         `;
@@ -32,11 +37,20 @@ function displayProducts(items = furniture) {
     });
 }
 
-// 3. FILTERING LOGIC
+// 3. NEW: Delete Item Function
+function deleteItem(id) {
+    if(confirm("Delete this listing from Zuhal FurniHub?")) {
+        // Remove from the array
+        furniture = furniture.filter(item => item.id !== id);
+        // Update LocalStorage
+        localStorage.setItem('zuhal_products', JSON.stringify(furniture));
+        // Refresh the UI
+        displayProducts();
+    }
+}
+
+// 4. Filtering Logic
 function filterByStyle(style) {
-    const chips = document.querySelectorAll('.chip');
-    chips.forEach(c => c.classList.remove('active')); // Reset active button UI
-    
     if(style === 'All') {
         displayProducts(furniture);
     } else {
@@ -47,33 +61,19 @@ function filterByStyle(style) {
 
 function filterBySize() {
     const selectedSize = document.getElementById('roomSize').value;
-    const filtered = (selectedSize === 'all') 
-        ? furniture 
-        : furniture.filter(item => item.size === selectedSize);
+    const filtered = (selectedSize === 'all') ? furniture : furniture.filter(item => item.size === selectedSize);
     displayProducts(filtered);
 }
 
-// 4. SEARCH LOGIC
-function searchFurniture() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    const filtered = furniture.filter(item => 
-        item.name.toLowerCase().includes(searchTerm)
-    );
-    displayProducts(filtered);
-}
-
-// 5. SELLER LOGIC (sell.html)
+// 5. Seller & Math Logic (sell.html)
 function updateEarnings() {
-    const priceInput = document.getElementById('itemPrice');
-    const feeDisplay = document.getElementById('feeAmount');
-    const earningDisplay = document.getElementById('finalEarning');
+    const price = document.getElementById('itemPrice').value;
+    const fee = price * 0.10;
+    const earning = price - fee;
 
-    if(priceInput && feeDisplay && earningDisplay) {
-        const price = priceInput.value || 0;
-        const fee = price * 0.10;
-        const earning = price - fee;
-        feeDisplay.innerText = fee.toLocaleString();
-        earningDisplay.innerText = earning.toLocaleString();
+    if(document.getElementById('feeAmount')){
+        document.getElementById('feeAmount').innerText = fee.toLocaleString();
+        document.getElementById('finalEarning').innerText = earning.toLocaleString();
     }
 }
 
@@ -89,22 +89,21 @@ function postAd() {
     }
 
     const newAd = {
-        id: Date.now(),
+        id: Date.now(), 
         name: name,
         price: parseInt(price),
         style: style,
         premium: isPremium,
-        img: "" // Placeholder
+        img: "" 
     };
 
     furniture.push(newAd);
     localStorage.setItem('zuhal_products', JSON.stringify(furniture));
-
-    alert(isPremium ? "Premium Ad Posted!" : "Ad Posted Successfully!");
+    alert("Ad Posted!");
     window.location.href = "index.html";
 }
 
-// 6. TOOLS (Delivery & Requests)
+// 6. Tools (Delivery & Requests)
 function calculateDelivery() {
     const baseRate = 500;
     const areaBonus = parseInt(document.getElementById('pickup').value);
@@ -115,11 +114,9 @@ function calculateDelivery() {
 
 function submitRequest() {
     const itemName = document.getElementById('customItemName').value;
-    if(!itemName) return alert("Please enter an item name!");
-    alert(`Success! Your request for "${itemName}" sent to local carpenters.`);
+    if(itemName === "") return alert("Enter item name!");
+    alert(`Request for "${itemName}" sent to carpenters!`);
 }
 
-// 7. BOOTSTRAP: Run on Load
-document.addEventListener('DOMContentLoaded', () => {
-    displayProducts();
-});
+// Initialize
+displayProducts();
