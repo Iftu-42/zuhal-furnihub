@@ -13,8 +13,12 @@ function displayProducts(items = furniture) {
     if (!grid) return; 
     grid.innerHTML = "";
 
+    if (items.length === 0) {
+        grid.innerHTML = `<p style="text-align:center; grid-column: 1/-1;">No items found. Try a different search!</p>`;
+        return;
+    }
+
     items.forEach(item => {
-        const commission = item.price * 0.10;
         grid.innerHTML += `
             <div class="product-card ${item.premium ? 'premium-card' : ''}">
                 ${item.premium ? '<span class="premium-tag">PREMIUM</span>' : ''}
@@ -22,8 +26,8 @@ function displayProducts(items = furniture) {
                 <div style="padding:15px;">
                     <h3>${item.name}</h3>
                     <p><strong>${Number(item.price).toLocaleString()} ETB</strong></p>
-                    <div style="display:flex; justify-content: space-between; margin-top:12px;">
-                        <button class="buy-btn" onclick="window.location.href='details.html?id=${item.id}'">View</button>
+                    <div style="display:flex; justify-content: space-between; margin-top:12px; gap:10px;">
+                        <button class="buy-btn" style="flex:1; background:var(--zuhal-green); color:white; border:none; padding:8px; border-radius:4px; cursor:pointer;" onclick="window.location.href='details.html?id=${item.id}'">View</button>
                         <button class="delete-btn" onclick="deleteItem(${item.id})">Remove</button>
                     </div>
                 </div>
@@ -34,63 +38,12 @@ function displayProducts(items = furniture) {
 // 3. SEARCH & FILTERS
 function searchFurniture() {
     const term = document.getElementById('searchInput').value.toLowerCase();
-    const filtered = furniture.filter(f => f.name.toLowerCase().includes(term));
+    const filtered = furniture.filter(f => f.name.toLowerCase().includes(term) || f.style.toLowerCase().includes(term));
     displayProducts(filtered);
 }
 
 function filterByStyle(style) {
-    const filtered = (style === 'All') ? furniture : furniture.filter(f => f.style === style);
-    displayProducts(filtered);
-}
-
-function filterBySize() {
-    const size = document.getElementById('roomSize').value;
-    const filtered = (size === 'all') ? furniture : furniture.filter(f => f.size === size);
-    displayProducts(filtered);
-}
-
-// 4. ITEM DETAILS & RELATED (details.html)
-function showItemDetails(id) {
-    const view = document.getElementById('detailsView');
-    if (!view) return;
-    const item = furniture.find(f => f.id == id);
-    if (!item) return view.innerHTML = "<h2>Item Not Found</h2>";
-
-    view.innerHTML = `
-        <div class="details-image"><img src="${item.img}"></div>
-        <div class="details-info">
-            <h1>${item.name}</h1>
-            <p class="price-tag">${item.price.toLocaleString()} ETB</p>
-            <div class="contact-box">
-                <a href="https://wa.me/251900000000?text=Interested in ${item.name}" class="whatsapp-btn">Chat on WhatsApp</a>
-            </div>
-        </div>`;
-    showRelated(item.style, item.id);
-}
-
-function showRelated(style, id) {
-    const related = furniture.filter(f => f.style === style && f.id != id);
-    const relatedGrid = document.getElementById('relatedGrid');
-    if (relatedGrid) {
-        // reuse display logic or simple version here
-    }
-}
-
-// 5. DARK MODE TOGGLE
-const toggleBtn = document.getElementById('dark-mode-toggle');
-if (localStorage.getItem('dark-mode') === 'enabled') document.body.classList.add('dark-mode');
-
-if (toggleBtn) {
-    toggleBtn.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        const mode = document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled';
-        localStorage.setItem('dark-mode', mode);
-        toggleBtn.innerText = mode === 'enabled' ? '☀️' : '🌙';
-    });
-}
-
-// 6. INITIALIZE
-document.addEventListener('DOMContentLoaded', () => {
-    const id = new URLSearchParams(window.location.search).get('id');
-    id ? showItemDetails(id) : displayProducts();
-});
+    // Update active UI for chips
+    document.querySelectorAll('.chip').forEach(chip => {
+        chip.classList.remove('active');
+        if(chip.innerText === style) chip.
