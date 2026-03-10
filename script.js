@@ -1,20 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const itemId = urlParams.get('id');
-    
-    if (itemId) {
-        showItemDetails(itemId);
-        
-        // Find the current item to get its category
-        const currentItem = furniture.find(f => f.id == itemId);
-        if (currentItem) {
-            showRelatedProducts(currentItem.style, currentItem.id);
-        }
-    } else {
-        displayProducts();
-    }
-});
-// 1. Data Setup (Load from LocalStorage or use Defaults)
+// 1. DATA & STORAGE
 const defaultFurniture = [
     { id: 1, name: "Zuhal Velvet Sofa", price: 75000, style: "Modern", size: "large", premium: true, img: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=400" },
     { id: 2, name: "Traditional Coffee Table", price: 12000, style: "Ethiopian Traditional", size: "small", premium: false, img: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=400" },
@@ -23,132 +7,90 @@ const defaultFurniture = [
 
 let furniture = JSON.parse(localStorage.getItem('zuhal_products')) || defaultFurniture;
 
-// 2. Main Display Function (Home Page)
+// 2. DISPLAY LOGIC (Main Grid)
 function displayProducts(items = furniture) {
     const grid = document.getElementById('productGrid');
     if (!grid) return; 
-    
     grid.innerHTML = "";
 
     items.forEach(item => {
         const commission = item.price * 0.10;
-        const card = `
+        grid.innerHTML += `
             <div class="product-card ${item.premium ? 'premium-card' : ''}">
                 ${item.premium ? '<span class="premium-tag">PREMIUM</span>' : ''}
-                <img src="${item.img || 'https://via.placeholder.com/400x250?text=Zuhal+Furniture'}" style="width:100%; height:200px; object-fit:cover;">
+                <img src="${item.img || 'https://via.placeholder.com/400x250'}" style="width:100%; height:200px; object-fit:cover;">
                 <div style="padding:15px;">
                     <h3>${item.name}</h3>
                     <p><strong>${Number(item.price).toLocaleString()} ETB</strong></p>
-                    <small style="color: #666;">Zuhal Fee (10%): ${commission.toLocaleString()} ETB</small>
-                    
-                    <div style="display:flex; justify-content: space-between; margin-top:12px; gap: 8px;">
-                        <button class="buy-btn" onclick="window.location.href='details.html?id=${item.id}'" style="flex: 1; background:var(--zuhal-green); color:white; border:none; padding:8px; border-radius:4px; cursor:pointer;">View</button>
-                        <button class="delete-btn" onclick="deleteItem(${item.id})" style="background:#ffeded; color:#cc0000; border:none; padding:8px; border-radius:4px; cursor:pointer; font-size:12px;">Remove</button>
+                    <div style="display:flex; justify-content: space-between; margin-top:12px;">
+                        <button class="buy-btn" onclick="window.location.href='details.html?id=${item.id}'">View</button>
+                        <button class="delete-btn" onclick="deleteItem(${item.id})">Remove</button>
                     </div>
                 </div>
-            </div>
-        `;
-        grid.innerHTML += card;
+            </div>`;
     });
 }
 
-// 3. Item Details Function (details.html)
+// 3. SEARCH & FILTERS
+function searchFurniture() {
+    const term = document.getElementById('searchInput').value.toLowerCase();
+    const filtered = furniture.filter(f => f.name.toLowerCase().includes(term));
+    displayProducts(filtered);
+}
+
+function filterByStyle(style) {
+    const filtered = (style === 'All') ? furniture : furniture.filter(f => f.style === style);
+    displayProducts(filtered);
+}
+
+function filterBySize() {
+    const size = document.getElementById('roomSize').value;
+    const filtered = (size === 'all') ? furniture : furniture.filter(f => f.size === size);
+    displayProducts(filtered);
+}
+
+// 4. ITEM DETAILS & RELATED (details.html)
 function showItemDetails(id) {
-    const container = document.getElementById
-function showRelatedProducts(currentCategory, currentId) {
+    const view = document.getElementById('detailsView');
+    if (!view) return;
+    const item = furniture.find(f => f.id == id);
+    if (!item) return view.innerHTML = "<h2>Item Not Found</h2>";
+
+    view.innerHTML = `
+        <div class="details-image"><img src="${item.img}"></div>
+        <div class="details-info">
+            <h1>${item.name}</h1>
+            <p class="price-tag">${item.price.toLocaleString()} ETB</p>
+            <div class="contact-box">
+                <a href="https://wa.me/251900000000?text=Interested in ${item.name}" class="whatsapp-btn">Chat on WhatsApp</a>
+            </div>
+        </div>`;
+    showRelated(item.style, item.id);
+}
+
+function showRelated(style, id) {
+    const related = furniture.filter(f => f.style === style && f.id != id);
     const relatedGrid = document.getElementById('relatedGrid');
-    if (!relatedGrid) return;
-
-    // Filter items: must be same style BUT not the item we are currently looking at
-    const related = furniture.filter(f => f.style === currentCategory && f.id != currentId);
-
-    if (related.length === 0) {
-        // If no same style, just show the most recent 3 items
-        const recent = furniture.filter(f => f.id != currentId).slice(0, 3);
-        renderRelated(recent);
-    } else {
-        renderRelated(related.slice(0, 3)); // Show top 3 matches
+    if (relatedGrid) {
+        // reuse display logic or simple version here
     }
 }
 
-function renderRelated(items) {
-    const relatedGrid = document.getElementById('relatedGrid');
-    relatedGrid.innerHTML = "";
-
-    items.forEach(item => {
-        const card = `
-            <div class="product-card">
-                <img src="${item.img || 'https://via.placeholder.com/400x250'}" style="width:100%; height:180px; object-fit:cover;">
-                <div style="padding:15px;">
-                    <h3>${item.name}</h3>
-                    <p><strong>${item.price.toLocaleString()} ETB</strong></p>
-                    <button class="buy-btn" onclick="window.location.href='details.html?id=${item.id}'" style="width:100%; background:var(--zuhal-green); color:white; border:none; padding:8px; border-radius:4px; cursor:pointer;">View</button>
-                </div>
-            </div>
-        `;
-        relatedGrid.innerHTML += card;
-    });
-}
-// --- DARK MODE LOGIC ---
+// 5. DARK MODE TOGGLE
 const toggleBtn = document.getElementById('dark-mode-toggle');
-const body = document.body;
-
-// Check if user previously liked Dark Mode
-if (localStorage.getItem('dark-mode') === 'enabled') {
-    body.classList.add('dark-mode');
-    if(toggleBtn) toggleBtn.innerText = '☀️';
-}
+if (localStorage.getItem('dark-mode') === 'enabled') document.body.classList.add('dark-mode');
 
 if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        
-        if (body.classList.contains('dark-mode')) {
-            localStorage.setItem('dark-mode', 'enabled');
-            toggleBtn.innerText = '☀️';
-        } else {
-            localStorage.setItem('dark-mode', 'disabled');
-            toggleBtn.innerText = '🌙';
-        }
+        document.body.classList.toggle('dark-mode');
+        const mode = document.body.classList.contains('dark-mode') ? 'enabled' : 'disabled';
+        localStorage.setItem('dark-mode', mode);
+        toggleBtn.innerText = mode === 'enabled' ? '☀️' : '🌙';
     });
 }
-function postAd() {
-    const name = document.getElementById('itemName').value;
-    const price = document.getElementById('itemPrice').value;
-    const style = document.getElementById('itemStyle').value;
-    const isPremium = document.getElementById('isPremium').checked;
-    const imageFile = document.getElementById('itemImageInput').files[0];
 
-    if (!name || !price) return alert("Please enter name and price!");
-
-    const reader = new FileReader();
-
-    reader.onload = function(e) {
-        const base64Image = e.target.result; // This is the image converted to text
-
-        const newAd = { 
-            id: Date.now(), 
-            name, 
-            price: parseInt(price), 
-            style, 
-            premium: isPremium, 
-            img: base64Image // Now saving the actual uploaded image!
-        };
-
-        furniture.push(newAd);
-        localStorage.setItem('zuhal_products', JSON.stringify(furniture));
-        
-        alert("Success! Your furniture is now live.");
-        window.location.href = "index.html";
-    };
-
-    if (imageFile) {
-        reader.readAsDataURL(imageFile); // Start reading the file
-    } else {
-        // If no image, use a placeholder
-        const newAd = { id: Date.now(), name, price: parseInt(price), style, premium: isPremium, img: "https://via.placeholder.com/400x250?text=No+Image" };
-        furniture.push(newAd);
-        localStorage.setItem('zuhal_products', JSON.stringify(furniture));
-        window.location.href = "index.html";
-    }
-}
+// 6. INITIALIZE
+document.addEventListener('DOMContentLoaded', () => {
+    const id = new URLSearchParams(window.location.search).get('id');
+    id ? showItemDetails(id) : displayProducts();
+});
