@@ -1,160 +1,31 @@
-:root {
-    --zuhal-green: #3D5A37;
-    --zuhal-orange: #D98344;
-    --zuhal-cream: #FDFBF7;
-    --bg-card: #F4EFE6;
-}
-
-body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background-color: var(--zuhal-cream);
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    background: var(--zuhal-green);
-    color: white;
-}
-
-.hero {
-    padding: 40px 20px;
-    text-align: center;
-}
-
-.highlight { color: var(--zuhal-green); }
-
-.style-discovery {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    padding: 10px 20px;
-}
-
-.chip {
-    border: 1px solid #ddd;
-    background: white;
-    padding: 8px 15px;
-    border-radius: 20px;
-    white-space: nowrap;
-    cursor: pointer;
-}
-
-.chip.active {
-    background: var(--zuhal-orange);
-    color: white;
+.delete-btn {
+    background: #ffeded;
+    color: #cc0000;
     border: none;
-}
-
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
-
-.product-card {
-    background: var(--bg-card);
-    border-radius: 12px;
-    overflow: hidden;
-    position: relative;
-    padding-bottom: 15px;
-}
-
-.premium-badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: gold;
-    padding: 2px 8px;
-    font-size: 10px;
-    font-weight: bold;
-}
-.custom-request {
-    background: var(--zuhal-green);
-    color: white;
-    padding: 40px 20px;
-    margin-top: 50px;
-    text-align: center;
-}
-
-.request-form {
-    max-width: 500px;
-    margin: 20px auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.request-form input, .request-form textarea {
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-}
-
-.upload-box {
-    border: 2px dashed rgba(255,255,255,0.5);
-    padding: 20px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.request-btn {
-    background: var(--zuhal-orange);
-    color: white;
-    border: none;
-    padding: 15px;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-}
-.premium-card {
-    border: 2px solid var(--zuhal-orange);
-    box-shadow: 0 10px 20px rgba(217, 131, 68, 0.2);
-    transform: scale(1.02); /* Makes it pop slightly more */
-}
-
-.premium-tag {
-    background: var(--zuhal-orange);
-    color: white;
-    padding: 2px 10px;
-    font-size: 0.7rem;
-    font-weight: bold;
+    padding: 5px 10px;
     border-radius: 4px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-.form-container {
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 20px;
+    font-size: 11px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
 }
 
-.sell-card {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+.delete-btn:hover {
+    background: #cc0000;
+    color: white;
+}
+
+.nav-links {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     gap: 15px;
 }
 
-.earnings-breakdown {
-    background: var(--zuhal-cream);
-    padding: 15px;
-    border-left: 4px solid var(--zuhal-green);
-    font-size: 0.9rem;
-}
-
-.premium-option {
-    background: #fff8e1;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ffe082;
-    cursor: pointer;
-    font-size: 0.9rem;
+.sell-btn-nav {
+    color: white;
+    text-decoration: none;
+    background: var(--zuhal-orange);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: 600;
 }
