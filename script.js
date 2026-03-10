@@ -1,3 +1,19 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const itemId = urlParams.get('id');
+    
+    if (itemId) {
+        showItemDetails(itemId);
+        
+        // Find the current item to get its category
+        const currentItem = furniture.find(f => f.id == itemId);
+        if (currentItem) {
+            showRelatedProducts(currentItem.style, currentItem.id);
+        }
+    } else {
+        displayProducts();
+    }
+});
 // 1. Data Setup (Load from LocalStorage or use Defaults)
 const defaultFurniture = [
     { id: 1, name: "Zuhal Velvet Sofa", price: 75000, style: "Modern", size: "large", premium: true, img: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=400" },
