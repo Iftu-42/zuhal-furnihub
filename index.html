@@ -11,6 +11,11 @@
 
     <nav class="navbar">
         <div class="logo">Zuhal FurniHub</div>
+        
+        <div class="nav-links">
+            <a href="sell.html" class="sell-btn-nav">+ Sell Furniture</a>
+        </div>
+
         <div class="nav-icons">
             <span>🛒</span>
             <span>🔔</span>
@@ -21,7 +26,7 @@
     <header class="hero">
         <h1>Find your next <span class="highlight">comfort.</span></h1>
         <div class="search-container">
-            <input type="text" placeholder="Search sofas, tables, decor...">
+            <input type="text" id="searchInput" placeholder="Search sofas, tables, decor..." onkeyup="searchFurniture()">
             <button class="search-btn">🔍</button>
         </div>
     </header>
@@ -43,44 +48,21 @@
         </div>
     </section>
 
-    <main class="product-grid" id="productGrid">
-        <section class="delivery-calc">
-    <h3>🚚 Estimate Delivery Cost</h3>
-    <div class="calc-box">
-        <label>Pickup Area:</label>
-        <select id="pickup">
-            <option value="0">Addis Ketema (Merkato)</option>
-            <option value="150">Bole</option>
-            <option value="200">CMC / Ayat</option>
-            <option value="100">Piassa</option>
-        </select>
+    <main class="product-grid" id="productGrid"></main>
 
-        <label>Item Size:</label>
-        <select id="itemSize">
-            <option value="1">Small (Chair/Lamp)</option>
-            <option value="2.5">Medium (Dining Table)</option>
-            <option value="5">Large (3-Seater Sofa / Bed)</option>
-        </select>
-        
-        <button onclick="calculateDelivery()">Check Price</button>
-        <p id="deliveryResult"></p>
-    </div>
-</section>
-        </main>
-    <section class="custom-request">
-    <h2>Can't find what you need?</h2>
-    <p>Request a custom piece from local Addis carpenters.</p>
-    <div class="request-form">
-        <input type="text" id="customItemName" placeholder="e.g., Rosewood Office Desk">
-        <textarea id="customDescription" placeholder="Describe the dimensions and style..."></textarea>
-        <div class="upload-box">
-            <label for="file-upload">📸 Upload Reference Image</label>
-            <input id="file-upload" type="file" />
-        </div>
-        <button class="request-btn" onclick="submitRequest()">Send to Local Carpenters</button>
-    </div>
-</section>
+    <section class="tools-container">
+        <div class="delivery-calc">
+            <h3>🚚 Estimate Delivery Cost</h3>
+            <div class="calc-box">
+                <label>Pickup Area:</label>
+                <select id="pickup">
+                    <option value="0">Addis Ketema (Merkato)</option>
+                    <option value="150">Bole</option>
+                    <option value="200">CMC / Ayat</option>
+                    <option value="100">Piassa</option>
+                </select>
 
-    <script src="script.js"></script>
-</body>
-</html>
+                <label>Item Size:</label>
+                <select id="itemSize">
+                    <option value="1">Small (Chair/Lamp)</option>
+                    <option value="2.5">Medium (Dining Table)</option
