@@ -214,3 +214,15 @@ body.dark-mode select {
 .mode-btn:hover {
     transform: rotate(20deg);
 }
+.file-input {
+    padding: 10px;
+    background: var(--zuhal-cream);
+    border: 2px dashed var(--zuhal-green);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+body.dark-mode .file-input {
+    background: #2a2a2a;
+    border-color: #444;
+}
