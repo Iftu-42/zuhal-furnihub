@@ -1,0 +1,74 @@
+:root {
+    --zuhal-green: #3D5A37;
+    --zuhal-orange: #D98344;
+    --zuhal-cream: #FDFBF7;
+    --bg-card: #F4EFE6;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--zuhal-cream);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background: var(--zuhal-green);
+    color: white;
+}
+
+.hero {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.highlight { color: var(--zuhal-green); }
+
+.style-discovery {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 10px 20px;
+}
+
+.chip {
+    border: 1px solid #ddd;
+    background: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.chip.active {
+    background: var(--zuhal-orange);
+    color: white;
+    border: none;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.product-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.premium-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: gold;
+    padding: 2px 8px;
+    font-size: 10px;
+    font-weight: bold;
+}
