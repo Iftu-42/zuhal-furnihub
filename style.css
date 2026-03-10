@@ -1,228 +1,118 @@
-.delete-btn {
-    background: #ffeded;
-    color: #cc0000;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 11px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: 0.3s;
+/* --- 1. CORE BRANDING & VARIABLES --- */
+:root {
+    --zuhal-green: #3D5A37;
+    --zuhal-orange: #D98344;
+    --zuhal-cream: #FDFBF7;
+    --bg-card: #F4EFE6;
+    --text-main: #333;
+    --white: #ffffff;
+    --transition: 0.3s ease;
 }
 
-.delete-btn:hover {
-    background: #cc0000;
-    color: white;
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.sell-btn-nav {
-    color: white;
-    text-decoration: none;
-    background: var(--zuhal-orange);
-    padding: 8px 15px;
-    border-radius: 5px;
-    font-weight: 600;
-}
-.search-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    max-width: 600px;
-    margin: 20px auto;
-}
-
-#searchInput {
-    width: 80%;
-    padding: 12px;
-    border-radius: 25px;
-    border: 1px solid #ddd;
-    outline: none;
-}
-
-#searchInput:focus {
-    border-color: var(--zuhal-green);
-}
-.details-container {
-    max-width: 1000px;
-    margin: 40px auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    padding: 20px;
-    background: white;
-    border-radius: 20px;
-}
-
-.details-image img {
-    width: 100%;
-    border-radius: 15px;
-    object-fit: cover;
-}
-
-.details-info h1 { color: var(--zuhal-green); font-size: 2.5rem; }
-
-.contact-box {
-    margin-top: 30px;
-    padding: 20px;
-    background: var(--zuhal-cream);
-    border-radius: 12px;
-}
-
-.whatsapp-btn {
-    display: block;
-    text-align: center;
-    background: #25D366;
-    color: white;
-    padding: 15px;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    margin-top: 10px;
-}
-/* --- Details Page Layout --- */
-.details-container {
-    max-width: 1100px;
-    margin: 50px auto;
-    display: grid;
-    grid-template-columns: 1.2fr 1fr; /* Image is slightly larger than info box */
-    gap: 50px;
-    padding: 30px;
-    background: white;
-    border-radius: 24px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.03);
-}
-
-.details-image img {
-    width: 100%;
-    height: 500px;
-    border-radius: 18px;
-    object-fit: cover;
-}
-
-/* --- Typography & Info --- */
-.details-info h1 {
-    color: var(--zuhal-green);
-    font-size: 2.8rem;
-    margin-bottom: 10px;
-    font-weight: 600;
-}
-
-.details-info .price-tag {
-    font-size: 2rem;
-    color: var(--zuhal-orange);
-    font-weight: bold;
-    margin: 20px 0;
-}
-
-/* --- The WhatsApp Contact Box --- */
-.contact-box {
-    margin-top: 40px;
-    padding: 25px;
-    background: #f9fcf8; /* Very light green tint */
-    border: 1px solid #e1eedd;
-    border-radius: 16px;
-    text-align: center;
-}
-
-.whatsapp-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: #25D366; /* Official WhatsApp Green */
-    color: white;
-    padding: 18px;
-    text-decoration: none;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    transition: transform 0.3s ease, background 0.3s ease;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-}
-
-.whatsapp-btn:hover {
-    background: #1eb954;
-    transform: translateY(-3px);
-}
-
-/* Mobile Responsiveness: Stack columns on small screens */
-@media (max-width: 768px) {
-    .details-container {
-        grid-template-columns: 1fr;
-        margin: 10px;
-        padding: 15px;
-    }
-    
-    .details-image img {
-        height: 300px;
-    }
-}
-.related-section {
-    max-width: 1100px;
-    margin: 0 auto 60px;
-    padding: 0 20px;
-}
-
-.related-section hr {
-    border: 0;
-    border-top: 1px solid #eee;
-    margin-bottom: 20px;
-}
-/* --- Dark Mode Colors --- */
+/* --- 2. DARK MODE OVERRIDES --- */
 body.dark-mode {
-    --zuhal-cream: #121212; /* Dark Background */
-    --bg-card: #1e1e1e;    /* Darker Grey Cards */
-    color: #e0e0e0;        /* Light Text */
+    --zuhal-cream: #121212; 
+    --bg-card: #1e1e1e;   
+    --text-main: #e0e0e0;
+    --white: #1e1e1e;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--zuhal-cream);
+    color: var(--text-main);
+    transition: background-color var(--transition);
+}
+
+/* --- 3. NAVIGATION --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: var(--zuhal-green);
+    color: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 body.dark-mode .navbar {
     background: #0a0a0a;
 }
 
-body.dark-mode .product-card, 
-body.dark-mode .details-container,
-body.dark-mode .sell-card {
-    background: #1e1e1e;
-    color: white;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+.logo { font-weight: bold; font-size: 1.4rem; }
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-body.dark-mode input, 
-body.dark-mode textarea, 
-body.dark-mode select {
-    background: #2a2a2a;
+.sell-btn-nav {
     color: white;
-    border: 1px solid #444;
+    text-decoration: none;
+    background: var(--zuhal-orange);
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: var(--transition);
 }
 
-/* Toggle Button Style */
+.sell-btn-nav:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+.nav-icons { display: flex; align-items: center; gap: 15px; }
+
 .mode-btn {
     background: none;
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    padding: 5px;
-    transition: transform 0.3s ease;
+    transition: transform var(--transition);
 }
 
-.mode-btn:hover {
-    transform: rotate(20deg);
-}
-.file-input {
-    padding: 10px;
-    background: var(--zuhal-cream);
-    border: 2px dashed var(--zuhal-green);
-    border-radius: 8px;
-    cursor: pointer;
+.mode-btn:hover { transform: rotate(20deg); }
+
+/* --- 4. HERO & SEARCH --- */
+.hero {
+    padding: 60px 20px;
+    text-align: center;
 }
 
-body.dark-mode .file-input {
+.highlight { color: var(--zuhal-green); }
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    max-width: 600px;
+    margin: 30px auto;
+}
+
+#searchInput {
+    width: 80%;
+    padding: 14px 20px;
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    outline: none;
+    font-size: 1rem;
+}
+
+body.dark-mode #searchInput {
     background: #2a2a2a;
-    border-color: #444;
+    color: white;
+    border: 1px solid #444;
 }
+
+#searchInput:focus { border-color: var(--zuhal-green); }
+
+/* --- 5. FILTERS --- */
+.filter-section {
+    padding: 0 20px 30px;
+    text-align: center;
+}
+
+.style-discovery {
+    display:
