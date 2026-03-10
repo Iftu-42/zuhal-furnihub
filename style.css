@@ -110,3 +110,20 @@ body {
     border-radius: 8px;
     cursor: pointer;
 }
+.premium-card {
+    border: 2px solid var(--zuhal-orange);
+    box-shadow: 0 10px 20px rgba(217, 131, 68, 0.2);
+    transform: scale(1.02); /* Makes it pop slightly more */
+}
+
+.premium-tag {
+    background: var(--zuhal-orange);
+    color: white;
+    padding: 2px 10px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border-radius: 4px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
