@@ -112,3 +112,43 @@ if (toggleBtn) {
         }
     });
 }
+function postAd() {
+    const name = document.getElementById('itemName').value;
+    const price = document.getElementById('itemPrice').value;
+    const style = document.getElementById('itemStyle').value;
+    const isPremium = document.getElementById('isPremium').checked;
+    const imageFile = document.getElementById('itemImageInput').files[0];
+
+    if (!name || !price) return alert("Please enter name and price!");
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        const base64Image = e.target.result; // This is the image converted to text
+
+        const newAd = { 
+            id: Date.now(), 
+            name, 
+            price: parseInt(price), 
+            style, 
+            premium: isPremium, 
+            img: base64Image // Now saving the actual uploaded image!
+        };
+
+        furniture.push(newAd);
+        localStorage.setItem('zuhal_products', JSON.stringify(furniture));
+        
+        alert("Success! Your furniture is now live.");
+        window.location.href = "index.html";
+    };
+
+    if (imageFile) {
+        reader.readAsDataURL(imageFile); // Start reading the file
+    } else {
+        // If no image, use a placeholder
+        const newAd = { id: Date.now(), name, price: parseInt(price), style, premium: isPremium, img: "https://via.placeholder.com/400x250?text=No+Image" };
+        furniture.push(newAd);
+        localStorage.setItem('zuhal_products', JSON.stringify(furniture));
+        window.location.href = "index.html";
+    }
+}
