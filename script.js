@@ -62,3 +62,12 @@ function calculateDelivery() {
     document.getElementById('deliveryResult').innerText = 
         `Estimated Delivery: ${total.toLocaleString()} ETB (Includes loading/unloading)`;
 }
+function filterBySize() {
+    const selectedSize = document.getElementById('roomSize').value;
+    
+    const filtered = (selectedSize === 'all') 
+        ? furniture 
+        : furniture.filter(item => item.size === selectedSize);
+        
+    displayProducts(filtered);
+}
