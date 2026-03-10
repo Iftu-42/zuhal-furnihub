@@ -45,6 +45,19 @@
 
     <main class="product-grid" id="productGrid">
         </main>
+    <section class="custom-request">
+    <h2>Can't find what you need?</h2>
+    <p>Request a custom piece from local Addis carpenters.</p>
+    <div class="request-form">
+        <input type="text" id="customItemName" placeholder="e.g., Rosewood Office Desk">
+        <textarea id="customDescription" placeholder="Describe the dimensions and style..."></textarea>
+        <div class="upload-box">
+            <label for="file-upload">📸 Upload Reference Image</label>
+            <input id="file-upload" type="file" />
+        </div>
+        <button class="request-btn" onclick="submitRequest()">Send to Local Carpenters</button>
+    </div>
+</section>
 
     <script src="script.js"></script>
 </body>
