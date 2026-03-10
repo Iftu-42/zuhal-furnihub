@@ -1,139 +1,88 @@
-/* Imports the "Plus Jakarta Sans" font used by modern tech startups like Airbnb/Google */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
-
 :root {
-    --primary: #2d5a27; /* Zuhal Forest Green */
-    --accent: #e67e22; /* Zuhal Sunset Orange */
-    --glass: rgba(255, 255, 255, 0.6); /* Translucent background */
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --bg-light: #fdfaf5;
-    --dark-bg: #121212;
-    --text-main: #1c1c1c;
-    --card-shadow: 0 20px 50px rgba(0,0,0,0.04);
+    --primary: #2d5a27;
+    --accent: #e67e22;
+    --bg: #fdfaf5;
+    --glass: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --text: #1a1a1a;
+    --shadow: 0 20px 40px rgba(0,0,0,0.05);
 }
 
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    background-color: var(--bg-light);
-    color: var(--text-main);
+    background: var(--bg);
+    color: var(--text);
     margin: 0;
-    overflow-x: hidden;
-    transition: background 0.5s ease;
+    transition: 0.5s;
 }
 
-/* Stunning Animated Background Gradient */
+body.dark-mode {
+    --bg: #121212;
+    --text: #ffffff;
+    --glass: rgba(30, 30, 30, 0.8);
+}
+
+/* Stunning Floating Background */
 body::before {
     content: "";
     position: fixed;
-    top: -50%; left: -50%;
-    width: 200%; height: 200%;
-    background: radial-gradient(circle, rgba(45,90,39,0.03) 0%, transparent 80%);
-    z-index: -2;
-    animation: backgroundFloat 20s infinite linear;
+    top: -10%; left: -10%; width: 40%; height: 40%;
+    background: radial-gradient(circle, rgba(45,90,39,0.08) 0%, transparent 70%);
+    z-index: -1;
+    animation: float 15s infinite alternate;
 }
 
-@keyframes backgroundFloat {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(50px, 50px); }
-}
+@keyframes float { from { transform: translate(0,0); } to { transform: translate(100px, 100px); } }
 
-/* --- GLASS NAVIGATION (FAANG STYLE) --- */
+/* NAVBAR */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; justify-content: space-between; align-items: center;
     padding: 15px 8%;
     background: var(--glass);
-    backdrop-filter: blur(20px); /* Blurs background for high-end look */
+    backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--glass-border);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    position: sticky; top: 0; z-index: 1000;
 }
 
-.nav-links {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-}
-
-/* Modern "Pill" Navigation Tabs */
 .tab-link {
-    padding: 10px 20px;
-    border-radius: 50px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: var(--primary);
-    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid transparent;
+    padding: 10px 20px; border-radius: 50px; cursor: pointer;
+    font-weight: 600; transition: 0.3s;
 }
 
-.tab-link:hover {
-    background: rgba(45,90,39,0.05);
+.tab-link.active { background: var(--primary); color: white; }
+
+/* HERO */
+.hero { text-align: center; padding: 80px 20px; animation: fadeInUp 0.8s ease-out; }
+
+.highlight { color: var(--accent); }
+
+.search-container {
+    display: flex; max-width: 600px; margin: 30px auto;
+    background: white; padding: 8px; border-radius: 50px; box-shadow: var(--shadow);
 }
 
-.tab-link.active {
-    background: var(--primary);
-    color: white;
-    box-shadow: 0 4px 15px rgba(45,90,39,0.2);
+.search-container input { flex: 1; border: none; padding: 15px 25px; outline: none; border-radius: 50px; }
+
+/* PRODUCT GRID */
+.product-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px; padding: 0 8% 50px;
 }
 
-/* --- THE "SUPER-APP" CONTENT VIEWER --- */
-.main-content {
-    padding: 40px 8% 100px;
-}
-
-/* Hides sections by default. Logic handles showing them. */
-.view-section {
-    display: none;
-    animation: viewFadeIn 0.6s ease-out forwards;
-}
-
-/* Stunning Entrance Animation for New Views */
-@keyframes viewFadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* --- MARKETPLACE (Landing/Buyer Dash) --- */
-.hero-section {
-    text-align: center;
-    padding: 80px 0;
-}
-
-.hero-section h1 {
-    font-size: 4.5rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: -3px;
-    margin-bottom: 10px;
-}
-
-/* --- SELLER STUDIO DASHBOARD --- */
-.seller-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 30px;
-    margin-top: 40px;
-}
-
-.dashboard-card {
-    background: white;
-    padding: 30px;
-    border-radius: 24px;
-    box-shadow: var(--card-shadow);
-    border: 1px solid rgba(0,0,0,0.03);
-}
-
-/* Stunning 3D Tilt Effect on Hover */
 .product-card {
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    background: white; border-radius: 24px; padding: 15px;
+    box-shadow: var(--shadow); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.product-card:hover {
-    transform: translateY(-15px) rotateX(3deg) rotateY(1deg);
-    box-shadow: 0 40px 80px rgba(0,0,0,0.1);
-}
+.product-card:hover { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+
+/* TOOLS & DASHBOARD */
+.tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 0 8% 100px; }
+
+.dashboard-card { background: var(--glass); padding: 30px; border-radius: 24px; border: 1px solid var(--glass-border); }
+
+.action-btn { background: var(--primary); color: white; padding: 12px 25px; border-radius: 12px; border: none; cursor: pointer; font-weight: 600; }
+
+.view-section { display: none; animation: fadeInUp 0.5s ease-out; }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
